@@ -22,7 +22,7 @@
 #pragma once
 
 /* ****************************************
- * lcd/extui/ia_creality/creality_extui.h
+ * lcd/extui/ia_creality/ia_creality_extui.h
  * ****************************************
  * Extensible_UI implementation for Creality DWIN
  * 10SPro, Max, CRX, and others
@@ -31,9 +31,9 @@
  *
  * ***************************************/
 
-#include "string.h"
-#include <Arduino.h>
 #include "../ui_api.h"
+
+#include <string.h>
 
 /*********************************/
 #define FHONE   (0x5A)
