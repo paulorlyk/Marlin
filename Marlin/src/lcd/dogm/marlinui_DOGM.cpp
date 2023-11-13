@@ -423,7 +423,7 @@ void MarlinUI::clear_lcd() { } // Automatically cleared by Picture Loop
     int8_t vlen = vstr ? utf8_strlen(vstr) : 0;
 
     bool mv_colon = false;
-    if (vlen) {
+    if (vlen && !center) {
       // Move the leading colon from the value to the label below
       mv_colon = (*vstr == ':');
       // Shorter value, wider label
@@ -551,8 +551,8 @@ void MarlinUI::clear_lcd() { } // Automatically cleared by Picture Loop
     if (inv) u8g.setColorIndex(1);
   }
 
-  void MenuItem_confirm::draw_select_screen(FSTR_P const yes, FSTR_P const no, const bool yesno, FSTR_P const fpre, const char * const string/*=nullptr*/, FSTR_P const suff/*=nullptr*/) {
-    ui.draw_select_screen_prompt(fpre, string, suff);
+  void MenuItem_confirm::draw_select_screen(FSTR_P const yes, FSTR_P const no, const bool yesno, FSTR_P const fpre, const char * const string/*=nullptr*/, FSTR_P const fsuf/*=nullptr*/) {
+    ui.draw_select_screen_prompt(fpre, string, fsuf);
     if (no)  draw_boxed_string(1, LCD_HEIGHT - 1, no, !yesno);
     if (yes) draw_boxed_string(LCD_WIDTH - (utf8_strlen(yes) * (USE_WIDE_GLYPH ? 2 : 1) + 1), LCD_HEIGHT - 1, yes, yesno);
   }
