@@ -779,7 +779,7 @@
   #define LCD_ST7920_DELAY_2           125
   #define LCD_ST7920_DELAY_3           125
 
-#elif ANY(ANET_FULL_GRAPHICS_LCD, ANET_FULL_GRAPHICS_LCD_ALT_WIRING)
+#elif ANY(ANET_FULL_GRAPHICS_LCD, CTC_A10S_A13)
 
   #define IS_RRD_FG_SC 1
   #define LCD_ST7920_DELAY_1           150
@@ -1613,20 +1613,6 @@
 
 #if DISABLED(DELTA)
   #undef DELTA_HOME_TO_SAFE_ZONE
-#endif
-
-// This flag indicates some kind of jerk storage is needed
-#if ANY(CLASSIC_JERK, IS_KINEMATIC)
-  #define HAS_CLASSIC_JERK 1
-#endif
-
-#if DISABLED(CLASSIC_JERK)
-  #define HAS_JUNCTION_DEVIATION 1
-#endif
-
-// E jerk exists with JD disabled (of course) but also when Linear Advance is disabled on Delta/SCARA
-#if HAS_EXTRUDERS && (ENABLED(CLASSIC_JERK) || (IS_KINEMATIC && DISABLED(LIN_ADVANCE)))
-  #define HAS_CLASSIC_E_JERK 1
 #endif
 
 //
