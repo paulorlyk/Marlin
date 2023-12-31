@@ -1575,7 +1575,7 @@
    */
   #define SHOW_BOOTSCREEN                 // Show the Marlin bootscreen on startup. ** ENABLE FOR PRODUCTION **
   #if ENABLED(SHOW_BOOTSCREEN)
-    #define BOOTSCREEN_TIMEOUT 3000       // (ms) Total Duration to display the boot screen(s)
+    #define BOOTSCREEN_TIMEOUT 1100       // (ms) Total Duration to display the boot screen(s)
     #if ANY(HAS_MARLINUI_U8GLIB, TFT_COLOR_UI)
       #define BOOT_MARLIN_LOGO_SMALL      // Show a smaller Marlin logo on the Boot Screen (saving lots of flash)
     #endif
@@ -1602,10 +1602,10 @@
   //#define LCD_TIMEOUT_TO_STATUS 15000   // (ms)
 
   // Scroll a longer status message into view
-  //#define STATUS_MESSAGE_SCROLLING
+  #define STATUS_MESSAGE_SCROLLING
 
   // Apply a timeout to low-priority status messages
-  //#define STATUS_MESSAGE_TIMEOUT_SEC 30 // (seconds)
+  #define STATUS_MESSAGE_TIMEOUT_SEC 90 // (seconds)
 
   // On the Info Screen, display XY with one decimal place when possible
   //#define LCD_DECIMAL_SMALL_XY
@@ -1654,7 +1654,7 @@
 #endif
 
 // Add 'M73' to set print job progress, overrides Marlin's built-in estimate
-//#define SET_PROGRESS_MANUALLY
+#define SET_PROGRESS_MANUALLY
 #if ENABLED(SET_PROGRESS_MANUALLY)
   #define SET_PROGRESS_PERCENT            // Add 'P' parameter to set percentage done
   #define SET_REMAINING_TIME              // Add 'R' parameter to set remaining time
@@ -1669,7 +1669,7 @@
 #if HAS_DISPLAY && ANY(HAS_MEDIA, SET_PROGRESS_MANUALLY)
   #define SHOW_PROGRESS_PERCENT           // Show print progress percentage (doesn't affect progress bar)
   #define SHOW_ELAPSED_TIME               // Display elapsed printing time (prefix 'E')
-  //#define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
+  #define SHOW_REMAINING_TIME           // Display estimated time to completion (prefix 'R')
   #if ENABLED(SET_INTERACTION_TIME)
     #define SHOW_INTERACTION_TIME         // Display time until next user interaction ('C' = filament change)
   #endif
@@ -1787,18 +1787,18 @@
    *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
    *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
    */
-  //#define SDCARD_SORT_ALPHA
+  #define SDCARD_SORT_ALPHA
 
   // SD Card Sorting options
   #if ENABLED(SDCARD_SORT_ALPHA)
     #define SDSORT_REVERSE     false  // Default to sorting file names in reverse order.
-    #define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
+    #define SDSORT_LIMIT       50     // Maximum number of sorted items (10-256). Costs 27 bytes each.
     #define SDSORT_FOLDERS     -1     // -1=above  0=none  1=below
-    #define SDSORT_GCODE       false  // Enable G-code M34 to set sorting behaviors: M34 S<-1|0|1> F<-1|0|1>
-    #define SDSORT_USES_RAM    false  // Pre-allocate a static array for faster pre-sorting.
+    #define SDSORT_GCODE       true  // Enable G-code M34 to set sorting behaviors: M34 S<-1|0|1> F<-1|0|1>
+    #define SDSORT_USES_RAM    true  // Pre-allocate a static array for faster pre-sorting.
     #define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-    #define SDSORT_CACHE_NAMES false  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
-    #define SDSORT_DYNAMIC_RAM false  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
+    #define SDSORT_CACHE_NAMES true  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
+    #define SDSORT_DYNAMIC_RAM true  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
     #define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
                                       // Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
   #endif
@@ -1807,11 +1807,11 @@
   // LCD's font must contain the characters. Check your selected LCD language.
   //#define UTF_FILENAME_SUPPORT
 
-  //#define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
-  //#define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
+  #define LONG_FILENAME_HOST_SUPPORT    // Get the long filename of a file/folder with 'M33 <dosname>' and list long filenames with 'M20 L'
+  #define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
   //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
 
-  //#define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
+  #define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
 
   //#define SD_ABORT_NO_COOLDOWN          // Leave the heaters on after Stop Print (not recommended!)
 
@@ -1896,11 +1896,11 @@
   //#define CONFIGURATION_EMBEDDING
 
   // Add an optimized binary file transfer mode, initiated with 'M28 B1'
-  //#define BINARY_FILE_TRANSFER
+  #define BINARY_FILE_TRANSFER
 
   #if ENABLED(BINARY_FILE_TRANSFER)
     // Include extra facilities (e.g., 'M20 F') supporting firmware upload via BINARY_FILE_TRANSFER
-    //#define CUSTOM_FIRMWARE_UPLOAD
+    #define CUSTOM_FIRMWARE_UPLOAD
   #endif
 
   /**
@@ -1935,7 +1935,7 @@
  * By default an onboard SD card reader may be shared as a USB mass-
  * storage device. This option hides the SD card from the host PC.
  */
-//#define NO_SD_HOST_DRIVE   // Disable SD Card access over USB (for security).
+#define NO_SD_HOST_DRIVE   // Disable SD Card access over USB (for security).
 
 /**
  * Additional options for Graphical Displays
@@ -2225,7 +2225,7 @@
 // LCD Backlight Timeout
 // Requires a display with a controllable backlight
 //
-//#define LCD_BACKLIGHT_TIMEOUT_MINS 1  // (minutes) Timeout before turning off the backlight
+#define LCD_BACKLIGHT_TIMEOUT_MINS 5  // (minutes) Timeout before turning off the backlight
 #if defined(DISPLAY_SLEEP_MINUTES) || defined(LCD_BACKLIGHT_TIMEOUT_MINS)
   #define EDITABLE_DISPLAY_TIMEOUT      // Edit timeout with M255 S<minutes> and a menu item
 #endif
@@ -2262,15 +2262,15 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define EP_BABYSTEPPING                 // M293/M294 babystepping with EMERGENCY_PARSER support
-  //#define BABYSTEP_WITHOUT_HOMING
-  //#define BABYSTEP_ALWAYS_AVAILABLE       // Allow babystepping at all times (not just during movement)
+  #define BABYSTEP_WITHOUT_HOMING
+  #define BABYSTEP_ALWAYS_AVAILABLE       // Allow babystepping at all times (not just during movement)
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
   //#define BABYSTEP_INVERT_Z               // Enable if Z babysteps should go the other way
   //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
-  #define BABYSTEP_MULTIPLICATOR_Z  1       // (steps or mm) Steps or millimeter distance for each Z babystep
+  #define BABYSTEP_MULTIPLICATOR_Z  40       // (steps or mm) Steps or millimeter distance for each Z babystep
   #define BABYSTEP_MULTIPLICATOR_XY 1       // (steps or mm) Steps or millimeter distance for each XY babystep
 
   //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
@@ -2312,13 +2312,13 @@
 #define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   #if ENABLED(DISTINCT_E_FACTORS)
-    #define ADVANCE_K { 0.045 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
+    #define ADVANCE_K { 0.0 }    // (mm) Compression length per 1mm/s extruder speed, per extruder
   #else
-    #define ADVANCE_K 0.045        // (mm) Compression length applying to all extruders
+    #define ADVANCE_K 0.0        // (mm) Compression length applying to all extruders
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with M900 L.
   //#define LA_DEBUG              // Print debug information to serial during operation. Disable for production use.
-  //#define ALLOW_LOW_EJERK       // Allow a DEFAULT_EJERK value of <10. Recommended for direct drive hotends.
+  #define ALLOW_LOW_EJERK       // Allow a DEFAULT_EJERK value of <10. Recommended for direct drive hotends.
   //#define EXPERIMENTAL_I2S_LA   // Allow I2S_STEPPER_STREAM to be used with LA. Performance degrades as the LA step rate reaches ~20kHz.
 #endif
 
@@ -2377,9 +2377,9 @@
  * the probe to be unable to reach any points.
  */
 #if PROBE_SELECTED && !IS_KINEMATIC
-  #define PROBING_MARGIN_LEFT 10
+  //#define PROBING_MARGIN_LEFT PROBING_MARGIN
   //#define PROBING_MARGIN_RIGHT PROBING_MARGIN
-  #define PROBING_MARGIN_FRONT 25
+  //#define PROBING_MARGIN_FRONT PROBING_MARGIN
   //#define PROBING_MARGIN_BACK PROBING_MARGIN
 #endif
 
@@ -2498,7 +2498,7 @@
   #define MIN_CIRCLE_SEGMENTS    72   // Minimum number of segments in a complete circle
   //#define ARC_SEGMENTS_PER_SEC 50   // Use the feedrate to choose the segment length
   #define N_ARC_CORRECTION       25   // Number of interpolated segments between corrections
-  //#define ARC_P_CIRCLES             // Enable the 'P' parameter to specify complete circles
+  #define ARC_P_CIRCLES             // Enable the 'P' parameter to specify complete circles
   //#define SF_ARC_FIX                // Enable only if using SkeinForge with "Arc Point" fillet procedure
 #endif
 
@@ -2535,7 +2535,7 @@
 // @section motion
 
 // Moves (or segments) with fewer steps than this will be joined with the next move
-#define MIN_STEPS_PER_SEGMENT 6
+#define MIN_STEPS_PER_SEGMENT 4
 
 /**
  * Minimum delay before and after setting the stepper DIR (in ns)
@@ -2604,7 +2604,7 @@
 
 // The ASCII buffer for serial input
 #define MAX_CMD_SIZE 96
-#define BUFSIZE 32
+#define BUFSIZE 16
 
 // Transmission to Host Buffer Size
 // To save 386 bytes of flash (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
@@ -2613,7 +2613,7 @@
 // For debug-echo: 128 bytes for the optimal speed.
 // Other output doesn't need to be that speedy.
 // :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-#define TX_BUFFER_SIZE 128
+#define TX_BUFFER_SIZE 64
 
 // Host Receive Buffer Size
 // Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
@@ -2682,7 +2682,7 @@
 //#define NO_TIMEOUTS 1000 // (ms)
 
 // Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-//#define ADVANCED_OK
+#define ADVANCED_OK
 
 // Printrun may have trouble receiving long strings all at once.
 // This option inserts short delays between lines of serial output.
@@ -3108,7 +3108,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      600
+    #define E0_CURRENT      800
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
@@ -3299,7 +3299,7 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_09STEP_24V               // All axes (override below)
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
   //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
   //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
@@ -3336,7 +3336,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  #define MONITOR_DRIVER_STATUS
+  //#define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -3443,13 +3443,13 @@
   /**
    * Step on both rising and falling edge signals (as with a square wave).
    */
-  //#define EDGE_STEPPING
+  #define EDGE_STEPPING
 
   /**
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continuous reporting.
    */
-  #define TMC_DEBUG
+  //#define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -3940,7 +3940,7 @@
  * workspace offsets to slightly optimize performance.
  * G92 will revert to its behavior from Marlin 1.0.
  */
-//#define NO_WORKSPACE_OFFSETS
+#define NO_WORKSPACE_OFFSETS
 
 /**
  * Disable M206 and M428 if you don't need home offsets.
@@ -4119,7 +4119,7 @@
  *
  * Implement M486 to allow Marlin to skip objects
  */
-//#define CANCEL_OBJECTS
+#define CANCEL_OBJECTS
 #if ENABLED(CANCEL_OBJECTS)
   #define CANCEL_OBJECTS_REPORTING // Emit the current object as a status message
 #endif
